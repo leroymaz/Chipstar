@@ -1,653 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chipstar · bakery</title>
-  <!-- Font Awesome 6 (free) for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* -------------------- reset & base -------------------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: #fcf8f3;
-      font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #2e241e;
-      line-height: 1.5;
-    }
-
-    /* subtle bakery background texture */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: radial-gradient(#e8d9cc 0.8px, transparent 0.8px);
-      background-size: 24px 24px;
-      opacity: 0.25;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* -------------------- typography -------------------- */
-    h1, h2, h3 {
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-    }
-
-    h1 {
-      font-size: 3rem;
-      color: #3b2b21;
-    }
-
-    h2 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-      color: #3b2b21;
-    }
-
-    .subhead {
-      font-size: 1.15rem;
-      color: #6b4f3c;
-      max-width: 550px;
-    }
-
-    /* -------------------- header / nav -------------------- */
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 0 16px;
-      border-bottom: 2px dashed #ead9cd;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: #8b5e3c;
-      letter-spacing: -0.02em;
-    }
-
-    .logo i {
-      font-size: 2rem;
-      color: #c87e4b;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      font-weight: 500;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: #5b4335;
-      transition: color 0.2s;
-      font-size: 1.05rem;
-    }
-
-    .nav-links a:hover {
-      color: #c87e4b;
-      text-decoration: underline wavy #c87e4b 1.5px;
-      text-underline-offset: 6px;
-    }
-
-    .cart-icon {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: white;
-      padding: 8px 18px;
-      border-radius: 50px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-      border: 1px solid #f0e1d6;
-      font-weight: 500;
-    }
-
-    .cart-icon i {
-      color: #b87a4b;
-    }
-
-    .cart-count {
-      background: #b87a4b;
-      color: white;
-      border-radius: 30px;
-      padding: 2px 8px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-left: 4px;
-    }
-
-    /* -------------------- hero -------------------- */
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-      padding: 48px 0 40px;
-      flex-wrap: wrap;
-    }
-
-    .hero-content {
-      flex: 1 1 300px;
-    }
-
-    .hero-content h1 {
-      margin-bottom: 20px;
-    }
-
-    .hero-content .subhead {
-      margin-bottom: 32px;
-    }
-
-    .btn {
-      display: inline-block;
-      background: #b87a4b;
-      color: white;
-      padding: 14px 34px;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 8px 16px -6px rgba(184, 122, 75, 0.4);
-      letter-spacing: 0.3px;
-    }
-
-    .btn:hover {
-      background: #a05e32;
-      transform: scale(1.02);
-      box-shadow: 0 12px 20px -8px rgba(184, 122, 75, 0.5);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 2px solid #b87a4b;
-      color: #b87a4b;
-      box-shadow: none;
-      margin-left: 12px;
-    }
-
-    .btn-outline:hover {
-      background: #b87a4b10;
-      transform: scale(1.02);
-    }
-
-    .hero-image {
-      flex: 1 1 260px;
-      text-align: center;
-      font-size: 9rem;
-      line-height: 1;
-      filter: drop-shadow(0 15px 15px rgba(0, 0, 0, 0.08));
-      background: radial-gradient(circle at 30% 30%, #fff6ef, #f5e3d5);
-      padding: 30px 10px;
-      border-radius: 50% 50% 30% 70% / 60% 40% 60% 40%;
-      transform: rotate(2deg);
-    }
-
-    /* -------------------- section titles -------------------- */
-    .section-title {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin: 50px 0 25px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .section-title h2 {
-      margin-bottom: 0;
-    }
-
-    .section-title a {
-      color: #b87a4b;
-      text-decoration: none;
-      font-weight: 500;
-      border-bottom: 2px solid transparent;
-    }
-
-    .section-title a:hover {
-      border-bottom-color: #b87a4b;
-    }
-
-    /* -------------------- product grid -------------------- */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 30px;
-    }
-
-    .product-card {
-      background: white;
-      border-radius: 30px;
-      padding: 24px 18px 22px;
-      box-shadow: 0 12px 28px -8px rgba(80, 50, 30, 0.06);
-      border: 1px solid #f5e7dd;
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .product-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 32px -12px rgba(120, 70, 40, 0.12);
-      border-color: #edd9cc;
-    }
-
-    .product-emoji {
-      font-size: 3.4rem;
-      margin-bottom: 12px;
-      line-height: 1;
-      filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.03));
-    }
-
-    .product-card h3 {
-      font-size: 1.3rem;
-      margin-bottom: 6px;
-      color: #3f2c1f;
-    }
-
-    .product-desc {
-      font-size: 0.9rem;
-      color: #7b6557;
-      margin-bottom: 16px;
-      padding: 0 4px;
-    }
-
-    .price {
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: #8b5e3c;
-      margin-bottom: 16px;
-      letter-spacing: -0.01em;
-    }
-
-    .price small {
-      font-size: 0.8rem;
-      font-weight: 400;
-      color: #b29582;
-      margin-left: 4px;
-    }
-
-    .add-btn {
-      background: #f9f1eb;
-      border: none;
-      color: #6b4a33;
-      padding: 10px 22px;
-      border-radius: 40px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      margin-top: auto;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .add-btn i {
-      font-size: 0.9rem;
-    }
-
-    .add-btn:hover {
-      background: #b87a4b;
-      color: white;
-    }
-
-    /* -------------------- about / story -------------------- */
-    .story-section {
-      display: flex;
-      gap: 40px;
-      align-items: center;
-      margin: 60px 0 40px;
-      background: #fff9f4;
-      border-radius: 60px 60px 30px 30px;
-      padding: 40px 40px;
-      border: 1px solid #f2e2d6;
-      flex-wrap: wrap;
-    }
-
-    .story-text {
-      flex: 2 1 300px;
-    }
-
-    .story-text h2 {
-      font-size: 1.9rem;
-    }
-
-    .story-text p {
-      color: #5d4a3c;
-      margin-top: 14px;
-      font-size: 1.05rem;
-    }
-
-    .story-icon {
-      flex: 1 1 150px;
-      font-size: 6rem;
-      text-align: center;
-      filter: drop-shadow(0 8px 12px #e2cdbc);
-    }
-
-    /* -------------------- footer -------------------- */
-    .footer {
-      margin-top: 60px;
-      padding: 36px 0 28px;
-      border-top: 2px dashed #ead9cd;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      color: #775e4d;
-      font-size: 0.95rem;
-    }
-
-    .footer-social i {
-      font-size: 1.4rem;
-      margin-left: 16px;
-      color: #b87a4b;
-      transition: transform 0.15s;
-      cursor: default;
-    }
-
-    .footer-social i:hover {
-      transform: scale(1.15);
-      color: #9b5f36;
-    }
-
-    /* -------------------- toast (cart feedback) -------------------- */
-    .toast {
-      position: fixed;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: #3b2b21;
-      color: #fef7f2;
-      padding: 12px 26px;
-      border-radius: 50px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      box-shadow: 0 16px 30px -8px rgba(0, 0, 0, 0.25);
-      opacity: 0;
-      transition: opacity 0.25s, transform 0.25s;
-      pointer-events: none;
-      z-index: 999;
-      white-space: nowrap;
-      border-left: 4px solid #dba87a;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    /* -------------------- responsive tweaks -------------------- */
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2.4rem;
-      }
-      .hero-image {
-        font-size: 6rem;
-        padding: 20px 0;
-      }
-      .story-section {
-        padding: 30px 22px;
-      }
-      .header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .nav-links {
-        flex-wrap: wrap;
-        gap: 18px;
-      }
-      .toast {
-        white-space: normal;
-        text-align: center;
-        min-width: 240px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .btn-outline {
-        margin-left: 0;
-        margin-top: 12px;
-      }
-      .hero-content {
-        text-align: center;
-      }
-      .hero-content .subhead {
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#061432">
+<meta name="description" content="Chipstar Bakery — Home of Sweetness and freshness. Browse cakes, pastries and treats.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Chipstar Bakery</title>
+<style>
+:root{--navy:#061432;--navy2:#0b2452;--silver:#dbe8ff;--blue:#3185ff;--muted:#a9bad9;--gold:#ffd66b}
+*{box-sizing:border-box}body{margin:0;color:#f7f9ff;font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(ellipse at top,#173d79 0,#071735 42%,#030b1d 100%);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.32;background-image:radial-gradient(#fff 1px,transparent 1px),radial-gradient(#75baff 1px,transparent 1px);background-size:87px 87px,131px 131px;background-position:0 0,35px 50px}
+button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit}.wrap{max-width:1180px;margin:auto;padding:18px;position:relative}
+header{border:1px solid #a8c9ff;border-radius:22px;padding:22px;background:linear-gradient(135deg,#071431eF,#16366beF);box-shadow:0 0 25px #5c9dff25;position:relative}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.brand{font-size:clamp(2.1rem,6vw,4rem);font-weight:900;letter-spacing:-2px;line-height:1;color:#f7faff;text-shadow:0 0 18px #9cc9ff}.tag{color:#d5e4ff;margin:10px 0 0;font-style:italic}.pill,.btn{border:1px solid #b9d6ff;border-radius:999px;background:linear-gradient(135deg,#1a65d9,#071a42);padding:10px 17px;box-shadow:0 0 12px #529bff26}.btn:hover,.pill:hover{filter:brightness(1.2)}.menu{position:relative}.menu-pop{display:none;position:absolute;right:0;top:48px;width:220px;background:#081733;border:1px solid #a9c9ff;border-radius:14px;padding:8px;z-index:5;box-shadow:0 10px 35px #0009}.menu-pop.open{display:grid}.menu-pop button{text-align:left;background:transparent;border:0;padding:12px;border-radius:8px}.menu-pop button:hover{background:#193666}
+nav{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}.searchbar{display:flex;gap:8px;margin:18px 0}.searchbar input{flex:1;min-width:0;background:#07142d;color:white;border:1px solid #5878a9;border-radius:12px;padding:12px}
+h2{font-size:1.35rem;margin:26px 0 12px}.sub{color:var(--muted);margin-top:-8px}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{border:1px solid #aacbff;border-radius:18px;overflow:hidden;background:#071632;box-shadow:0 5px 20px #0003}.food-img{height:155px;display:grid;place-items:center;font-size:5rem;background:linear-gradient(135deg,#1e4e8f,#101b38)}.feature .pad{padding:14px}.feature h3{margin:0}.muted{color:var(--muted)}.occasion-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.occasion{background:#0a1a38;border:1px solid #486da5;border-radius:14px;padding:14px 8px;text-align:center}.occasion span{display:block;font-size:2rem}.products{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.product{background:linear-gradient(150deg,#102b59,#07142c);border:1px solid #759dd7;border-radius:16px;overflow:hidden}.product .food-img{height:135px;font-size:4rem}.product .pad{padding:12px}.price{font-weight:800;font-size:1.15rem}.stars{color:var(--gold);font-size:.9rem}.actions{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:10px}.small{font-size:.85rem}.quick{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:20px}.quick button{background:#0b1b3a;border:1px solid #5479b3;border-radius:14px;padding:14px 6px}.quick b{display:block;font-size:1.5rem}.panel{display:none;margin-top:18px;padding:18px;border:1px solid #83aeea;border-radius:16px;background:#07152e}.panel.open{display:block}.chatlog{height:220px;overflow:auto;display:flex;flex-direction:column;gap:8px;margin:12px 0}.bubble{padding:10px 12px;border-radius:12px;max-width:88%;background:#17325e}.bubble.user{align-self:flex-end;background:#1758ad}.chatrow{display:flex;gap:8px}.chatrow input{flex:1;min-width:0;background:#020b1c;border:1px solid #49699a;border-radius:10px;padding:10px;color:white}.cart-line{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #28436b}.notice{color:#bcd5ff;font-size:.9rem}footer{margin:30px 0 10px;padding:20px;border-top:1px solid #759dd7;color:#b9c9e5;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+@media(max-width:800px){.products{grid-template-columns:repeat(2,1fr)}.occasion-grid{grid-template-columns:repeat(3,1fr)}.quick{grid-template-columns:repeat(3,1fr)}.feature-grid{grid-template-columns:1fr 1fr 1fr}.food-img{height:120px;font-size:4rem}}
+@media(max-width:520px){.wrap{padding:10px}.feature-grid{grid-template-columns:1fr}.feature{display:grid;grid-template-columns:110px 1fr}.feature .food-img{height:100%;min-height:125px;font-size:3.4rem}.occasion-grid{grid-template-columns:repeat(2,1fr)}.brand{letter-spacing:-1px}.quick{grid-template-columns:repeat(2,1fr)}}
+</style>
 </head>
-<body>
-
-  <div class="container">
-    <!-- header / navigation -->
-    <header class="header">
-      <div class="logo">
-        <i class="fas fa-bread-slice"></i>
-        <span>Chipstar</span>
-      </div>
-      <div class="nav-links">
-        <a href="#">menu</a>
-        <a href="#">our story</a>
-        <a href="#">visit</a>
-      </div>
-      <div class="cart-icon">
-        <i class="fas fa-shopping-bag"></i>
-        <span>cart</span>
-        <span class="cart-count" id="cartCount">0</span>
-      </div>
-    </header>
-
-    <!-- hero section -->
-    <section class="hero">
-      <div class="hero-content">
-        <h1>freshly baked<br>happiness.</h1>
-        <p class="subhead">Small-batch sourdough, buttery croissants, and seasonal pastries — made with organic flour and a lot of love.</p>
-        <div>
-          <a href="#" class="btn">order now</a>
-          <a href="#" class="btn btn-outline">see menu</a>
-        </div>
-      </div>
-      <div class="hero-image">
-        🥐🥖🥨
-      </div>
-    </section>
-
-    <!-- best sellers / product grid -->
-    <div class="section-title">
-      <h2>today's favourites</h2>
-      <a href="#">view all <i class="fas fa-arrow-right" style="font-size: 0.8rem;"></i></a>
-    </div>
-
-    <div class="product-grid" id="productGrid">
-      <!-- product 1 -->
-      <div class="product-card" data-id="1" data-name="country sourdough" data-price="7.50">
-        <div class="product-emoji">🍞</div>
-        <h3>country sourdough</h3>
-        <p class="product-desc">36h fermented, crackly crust, open crumb</p>
-        <div class="price">$7.50 <small>/ loaf</small></div>
-        <button class="add-btn"><i class="fas fa-plus-circle"></i> add to cart</button>
-      </div>
-      <!-- product 2 -->
-      <div class="product-card" data-id="2" data-name="butter croissant" data-price="4.20">
-        <div class="product-emoji">🥐</div>
-        <h3>butter croissant</h3>
-        <p class="product-desc">French butter, flaky layers, golden</p>
-        <div class="price">$4.20 <small>/ piece</small></div>
-        <button class="add-btn"><i class="fas fa-plus-circle"></i> add to cart</button>
-      </div>
-      <!-- product 3 -->
-      <div class="product-card" data-id="3" data-name="cinnamon roll" data-price="5.50">
-        <div class="product-emoji">🥨</div>
-        <h3>cinnamon roll</h3>
-        <p class="product-desc">soft brioche, cinnamon sugar, vanilla glaze</p>
-        <div class="price">$5.50 <small>/ piece</small></div>
-        <button class="add-btn"><i class="fas fa-plus-circle"></i> add to cart</button>
-      </div>
-      <!-- product 4 -->
-      <div class="product-card" data-id="4" data-name="berry galette" data-price="6.80">
-        <div class="product-emoji">🥧</div>
-        <h3>berry galette</h3>
-        <p class="product-desc">seasonal berries, almond cream, rustic crust</p>
-        <div class="price">$6.80 <small>/ piece</small></div>
-        <button class="add-btn"><i class="fas fa-plus-circle"></i> add to cart</button>
-      </div>
-    </div>
-
-    <!-- small brand story section -->
-    <section class="story-section">
-      <div class="story-icon">
-        <i class="fas fa-seedling" style="color: #ad7a55;"></i>
-      </div>
-      <div class="story-text">
-        <h2>baked with intention</h2>
-        <p>We’re a neighbourhood bakery obsessed with slow fermentation, local grains, and the simple joy of a good loaf. Every morning we roll, fold, and shape by hand — because shortcuts never taste as good.</p>
-      </div>
-    </section>
-
-    <!-- footer -->
-    <footer class="footer">
-      <div>© 2026 Chipstar — bakery </div>
-      <div class="footer-social">
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-facebook"></i>
-        <i class="fab fa-pinterest"></i>
-      </div>
-    </footer>
-  </div>
-
-  <!-- toast notification -->
-  <div id="toast" class="toast">🥖 added to cart</div>
-
-  <script>
-    (function() {
-      // ---------- cart state ----------
-      let cartItems = 0;
-      const cartCountEl = document.getElementById('cartCount');
-      const toastEl = document.getElementById('toast');
-      let toastTimeout = null;
-
-      // update cart display
-      function updateCartDisplay() {
-        cartCountEl.textContent = cartItems;
-      }
-
-      // show temporary toast message
-      function showToast(message) {
-        toastEl.textContent = message;
-        toastEl.classList.add('show');
-        if (toastTimeout) clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => {
-          toastEl.classList.remove('show');
-        }, 2000);
-      }
-
-      // handle add-to-cart clicks (delegation)
-      const productGrid = document.getElementById('productGrid');
-      if (productGrid) {
-        productGrid.addEventListener('click', (e) => {
-          const addBtn = e.target.closest('.add-btn');
-          if (!addBtn) return;
-
-          // find the product card
-          const card = addBtn.closest('.product-card');
-          if (!card) return;
-
-          const productName = card.dataset.name || 'item';
-          const productPrice = card.dataset.price || '0.00';
-
-          // increment cart
-          cartItems += 1;
-          updateCartDisplay();
-
-          // show toast with product name
-          showToast(`🥖 ${productName} added · $${productPrice}`);
-        });
-      }
-
-      // optional: cart icon click shows a friendly message (no real checkout)
-      const cartIcon = document.querySelector('.cart-icon');
-      if (cartIcon) {
-        cartIcon.addEventListener('click', () => {
-          if (cartItems === 0) {
-            showToast('🛒 your cart is empty — add something tasty!');
-          } else {
-            showToast(`🛒 ${cartItems} item${cartItems > 1 ? 's' : ''} in cart · checkout coming soon`);
-          }
-        });
-      }
-
-      // initialize display
-      updateCartDisplay();
-
-      // small additional interaction: hover effect on product emoji (just for fun)
-      // but not necessary; already nice with CSS.
-
-      // also make "order now" and "see menu" buttons show a friendly toast instead of jumping
-      // (so user gets feedback without leaving page)
-      const heroButtons = document.querySelectorAll('.hero .btn');
-      heroButtons.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (btn.textContent.includes('order')) {
-            showToast('📞 call us at (078) 246-2881 to order — or drop by!');
-          } else {
-            showToast('📋 full menu available in-store — come say hi!');
-          }
-        });
-      });
-
-      // also intercept "view all" and "our story / visit" links to avoid page jump
-      const dummyLinks = document.querySelectorAll('.section-title a, .nav-links a');
-      dummyLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const text = link.textContent.trim().toLowerCase();
-          if (text.includes('view all') || text.includes('menu')) {
-            showToast('🍞 more pastries coming soon — stay tuned!');
-          } else if (text.includes('story')) {
-            showToast('📖 our story: baked fresh daily, since 2020');
-          } else if (text.includes('visit')) {
-            showToast('📍 Simbi Park Rutendo · open 7am–6pm');
-          } else {
-            showToast('✨ thanks for exploring Chipstar Bakery');
-          }
-        });
-      });
-
-    })();
-  </script>
-</body>
-</html>
+<body><div class="wrap">
+<header>
+ <div class="top"><div><div class="brand">✧ CHIPSTAR ✧</div><p class="tag">Home of Sweetness and freshness.</p></div>
+ <div class="menu"><button class="pill" id="menuBtn" aria-label="Open menu">⋮</button><div class="menu-pop" id="menuPop"><button data-panel="chatPanel">🤖 Bakery chatbot</button><button data-panel="infoPanel">ℹ️ Information desk</button><button data-panel="feedbackPanel">✉️ Feedback & suggestions</button><button data-panel="ordersPanel">🛍️ Your order</button></div></div></div>
+ <nav><button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">☰ Menu list</button><button class="pill" data-panel="ordersPanel">🛒 Cart <span id="cartCount">0</span></button><button class="pill" data-panel="chatPanel">Ask our baker ✨</button></nav>
+</header>
+<div class="searchbar"><input id="search" placeholder="Search cakes, pastries, cupcakes…"><button class="btn" id="searchBtn">Search</button></div>
+<section><h2>✦ Our bakery favourites</h2><p class="sub">Small-batch delights, baked with love.</p><div class="feature-grid">
+<div class="feature"><div class="food-img">🎂</div><div class="pad"><h3>Signature Cakes</h3><div class="muted">Made for your biggest moments.</div><button class="pill" onclick="filterOccasion('cake')">Explore cakes →</button></div></div>
+<div class="feature"><div class="food-img">🧁</div><div class="pad"><h3>Dreamy Cupcakes</h3><div class="muted">Little treats, big happiness.</div><button class="pill" onclick="filterOccasion('cupcake')">Explore cupcakes →</button></div></div>
+<div class="feature"><div class="food-img">🥐</div><div class="pad"><h3>Fresh Pastries</h3><div class="muted">Golden, flaky, freshly baked.</div><button class="pill" onclick="filterOccasion('pastry')">Explore pastries →</button></div></div>
+</div></section>
+<section><h2>Perfect for every occasion ✨</h2><div class="occasion-grid">
+<button class="occasion" onclick="filterOccasion('birthday')"><span>🎉</span>Birthday party</button><button class="occasion" onclick="filterOccasion('breakfast')"><span>☕</span>Breakfast</button><button class="occasion" onclick="filterOccasion('snack')"><span>🍪</span>Snack time</button><button class="occasion" onclick="filterOccasion('wedding')"><span>💍</span>Wedding</button><button class="occasion" onclick="filterOccasion('valentine')"><span>💝</span>Valentine's</button>
+</div></section>
+<section id="products"><h2>Available now <span class="muted small" id="resultCount"></span></h2><p class="sub">Sample catalogue and prices — customise these for your bakery.</p><div class="products" id="productGrid"></div></section>
+<div class="quick">
+<button data-panel="ordersPanel"><b>🛍️</b>Orders</button><button data-panel="infoPanel"><b>ℹ️</b>Information desk</button><button onclick="document.getElementById('search').focus()"><b>🔎</b>Search products</button><button data-panel="ratingPanel"><b>⭐</b>Rate us</button><button data-panel="feedbackPanel"><b>💡</b>Suggestions</button><button data-panel="feedbackPanel"><b>✉️</b>Feedback</button>
+</div>
+<section class="panel" id="ordersPanel"><h2>Your basket 🛒</h2><div id="cartLines"></div><p><b>Total: <span id="cartTotal">$0.00</span></b></p><p><label for="fulfilmentChoice">Collection or delivery</label><br><select id="fulfilmentChoice" style="width:100%;padding:10px;background:#020b1c;color:white;border:1px solid #49699a;border-radius:9px"><option value="Collection">Collection</option><option value="Delivery">Delivery</option></select></p><p class="notice">Orders are handed off to Chipstar through WhatsApp. No payment is taken in this demo; the bakery will confirm availability, delivery details and final price.</p><button class="btn" id="checkout">Prepare order summary</button>
+<button class="btn" id="whatsappCheckout" style="margin-left:8px;background:linear-gradient(135deg,#147c50,#075334)">Send order via WhatsApp ↗</button>
+<div id="checkoutMsg" class="notice"></div>
+<p class="notice">WhatsApp ordering is configured for Chipstar. Select collection or delivery above; the bakery will confirm delivery availability and any fee.</p></section>
+<section class="panel" id="chatPanel"><h2>Chipstar Bakery Assistant 🤖</h2><p class="muted">Ask about cakes, ingredients, party orders, breakfast treats or recommendations.</p><div class="chatlog" id="chatlog"><div class="bubble">Hello! Welcome to Chipstar. 🧁 What sweet treat can I help you find today?</div></div><div class="chatrow"><input id="chatInput" placeholder="Ask about our bakery products…"><button class="btn" id="sendChat">Send</button></div></section>
+<section class="panel" id="infoPanel"><h2>Information desk</h2><p>Welcome to Chipstar — Home of Sweetness and freshness.</p><p>For custom cakes, weddings, birthdays and bulk pastry orders, use the feedback form to leave your preferred date, servings and contact details.</p><p class="notice">Add your real address, opening hours, phone number, allergen policy and delivery zones before launch.</p></section>
+<section class="panel" id="ratingPanel"><h2>Rate Chipstar ⭐</h2><p>How was your experience?</p><div id="stars" style="font-size:2rem;color:#ffd66b">☆ ☆ ☆ ☆ ☆</div><button class="btn" id="submitRating">Submit rating</button><p id="ratingMsg" class="notice"></p></section>
+<section class="panel" id="feedbackPanel"><h2>Feedback & suggestions ✉️</h2><form id="feedbackForm"><p><label>Your name (optional)<br><input id="fbName" style="width:100%;padding:10px;background:#020b1c;color:white;border:1px solid #49699a;border-radius:9px"></label></p><p><label>What would you like to tell us?<br><textarea id="fbText" required rows="3" style="width:100%;padding:10px;background:#020b1c;color:white;border:1px solid #49699a;border-radius:9px"></textarea></label></p><button class="btn">Save feedback on this device</button><p id="fbMsg" class="notice"></p></form></section>
+<footer><span>🛡️ Food safety & quality first</span><span>© <span id="year"></span> Chipstar Bakery. All rights reserved.</span><span>Licence: add verified local business details</span><span>Sweet Moments. Always. ✦</span></footer>
+</div>
+<script>
+const products=[
+{id:1,name:"Chocolate Celebration Cake",price:12.99,emoji:"🎂",rating:4.8,tags:["cake","birthday","wedding","valentine"],desc:"Rich chocolate sponge with silky frosting."},
+{id:2,name:"Vanilla Cupcakes (6)",price:6.99,emoji:"🧁",rating:4.7,tags:["cupcake","birthday","snack"],desc:"Fluffy vanilla cupcakes with swirled buttercream."},
+{id:3,name:"Butter Croissants",price:4.99,emoji:"🥐",rating:4.6,tags:["pastry","breakfast","snack"],desc:"Golden, buttery and flaky."},
+{id:4,name:"Red Velvet Cake",price:14.99,emoji:"🍰",rating:4.9,tags:["cake","birthday","wedding","valentine"],desc:"Red velvet layers with cream-cheese-style frosting."},
+{id:5,name:"Fruit Danish",price:5.99,emoji:"🥮",rating:4.5,tags:["pastry","breakfast","snack"],desc:"A crisp pastry topped with fruit."},
+{id:6,name:"Chocolate Chip Cookies",price:3.50,emoji:"🍪",rating:4.8,tags:["snack","breakfast"],desc:"A sweet crunchy favourite."},
+{id:7,name:"Wedding Tier Cake",price:85.00,emoji:"💍",rating:5.0,tags:["cake","wedding"],desc:"Elegant tiered cake; final price depends on size and design."},
+{id:8,name:"Strawberry Love Cake",price:18.50,emoji:"💝",rating:4.9,tags:["cake","valentine","birthday"],desc:"Strawberry layers for a special occasion."}
+];
+// SET THIS to the bakery's WhatsApp number in international format, digits only.
+ // Example format: country code + number, with no plus sign or spaces.
+const WHATSAPP_NUMBER = "263782462881";
+const CURRENCY = "USD";
+const FULFILMENT_OPTIONS = ["Collection", "Delivery"];
+let cart={}, activeFilter="", rating=0;
+const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:CURRENCY}).format(n);
+function render(list=products){document.getElementById("productGrid").innerHTML=list.map(p=>`<article class="product"><div class="food-img">${p.emoji}</div><div class="pad"><b>${p.name}</b><div class="muted small">${p.desc}</div><div class="actions"><span class="price">${money(p.price)}</span><span class="stars">★ ${p.rating}</span></div><button class="btn" style="width:100%;margin-top:10px" onclick="addCart(${p.id})">＋ Add to cart</button></div></article>`).join("");document.getElementById("resultCount").textContent=`(${list.length} items)`}
+function addCart(id){cart[id]=(cart[id]||0)+1;updateCart();document.getElementById("ordersPanel").classList.add("open")}
+function updateCart(){let ids=Object.keys(cart);document.getElementById("cartCount").textContent=ids.reduce((s,id)=>s+cart[id],0);document.getElementById("cartLines").innerHTML=ids.length?ids.map(id=>{let p=products.find(x=>x.id==id);return `<div class="cart-line"><span>${p.emoji} ${p.name} × ${cart[id]}</span><span>${money(p.price*cart[id])} <button class="pill" onclick="removeCart(${id})">−</button></span></div>`}).join(""):"Your basket is empty — add a treat to get started.";let total=ids.reduce((s,id)=>s+products.find(p=>p.id==id).price*cart[id],0);document.getElementById("cartTotal").textContent=money(total)}
+function removeCart(id){if(cart[id]>1)cart[id]--;else delete cart[id];updateCart()}
+function filterOccasion(tag){activeFilter=tag;let list=products.filter(p=>p.tags.includes(tag));render(list);document.getElementById("products").scrollIntoView({behavior:"smooth"})}
+function searchProducts(){let q=document.getElementById("search").value.toLowerCase().trim();activeFilter="";render(products.filter(p=>(p.name+" "+p.desc+" "+p.tags.join(" ")).toLowerCase().includes(q)))}
+document.getElementById("searchBtn").onclick=searchProducts;document.getElementById("search").addEventListener("keydown",e=>{if(e.key==="Enter")searchProducts()});
+document.getElementById("menuBtn").onclick=()=>document.getElementById("menuPop").classList.toggle("open");
+document.querySelectorAll("[data-panel]").forEach(b=>b.addEventListener("click",()=>{let panel=document.getElementById(b.dataset.panel);panel.classList.toggle("open");panel.scrollIntoView({behavior:"smooth",block:"nearest"});document.getElementById("menuPop").classList.remove("open")}));
+function orderText(){let ids=Object.keys(cart);let lines=ids.map(id=>{let p=products.find(p=>p.id==id);return `• ${p.name} × ${cart[id]} — ${money(p.price*cart[id])}`});const fulfilment=document.getElementById("fulfilmentChoice").value;return `Hello Chipstar Bakery! I'd like to place an order:\n\n${lines.join("\n")}\n\nTotal: ${document.getElementById("cartTotal").textContent}\nPreferred fulfilment: ${fulfilment}\nPlease confirm availability${fulfilment === "Delivery" ? ", delivery area, address details and delivery fee" : " and collection time"}, and final price.`}
+document.getElementById("checkout").onclick=()=>{let ids=Object.keys(cart);document.getElementById("checkoutMsg").textContent=ids.length?"Order summary prepared: "+ids.map(id=>products.find(p=>p.id==id).name+" × "+cart[id]).join(", ")+". Total "+document.getElementById("cartTotal").textContent+". Use WhatsApp to send this order to the bakery.":"Your basket is empty."};
+document.getElementById("whatsappCheckout").onclick=()=>{if(!Object.keys(cart).length){document.getElementById("checkoutMsg").textContent="Your basket is empty. Add a product first.";return;}if(!/^\d{8,15}$/.test(WHATSAPP_NUMBER)){document.getElementById("checkoutMsg").textContent="WhatsApp is almost ready. Set WHATSAPP_NUMBER in index.html to the bakery's international phone number (digits only), then reopen the app.";return;}window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(orderText()),"_blank","noopener");};
+function botReply(q){let s=q.toLowerCase();if(/price|cost|how much/.test(s)){return `Prices in our demo catalogue range from ${money(3.50)} for cookies to ${money(85.00)} for a wedding tier cake. Tap Menu to compare items; the bakery should confirm final custom-order prices.`}if(/birthday|party|celebrat/.test(s)){return "For a birthday, consider our Chocolate Celebration Cake, Red Velvet Cake and Vanilla Cupcakes. Tell the bakery your date, number of guests and preferred flavour for a custom quote."}if(/wedding/.test(s)){return "Our demo catalogue includes a Wedding Tier Cake. Tier count, servings, design and delivery affect the final quote, so confirm these with the bakery."}if(/breakfast|morning/.test(s)){return "For breakfast, try Butter Croissants, Fruit Danish or Chocolate Chip Cookies with your favourite hot drink."}if(/allerg|ingredient|vegan|gluten|nut|dairy/.test(s)){return "Please contact the bakery to verify ingredients and cross-contamination risks before ordering. This demo catalogue does not contain verified allergen information."}if(/order|deliver|delivery|pay/.test(s)){return "Add items to your basket and send the order through WhatsApp. Choose collection or delivery in the basket; the bakery will confirm availability, delivery details and any fee. Payments and delivery tracking are not built into this demo."}if(/valentine|love/.test(s)){return "For a romantic treat, try the Strawberry Love Cake or Red Velvet Cake. You can also ask about a personalised message."}if(/hello|hi |hey/.test(s)){return "Hello and welcome! Are you shopping for a cake, breakfast pastries, snacks, or a special event?"}return "I'd be happy to help with cakes, cupcakes, pastries, breakfast, party treats and custom orders. What occasion or product do you have in mind?"}
+function send(){let input=document.getElementById("chatInput"),q=input.value.trim();if(!q)return;let log=document.getElementById("chatlog");log.insertAdjacentHTML("beforeend",`<div class="bubble user"></div>`);log.lastElementChild.textContent=q;let answer=botReply(q);log.insertAdjacentHTML("beforeend",`<div class="bubble"></div>`);log.lastElementChild.textContent=answer;input.value="";log.scrollTop=log.scrollHeight}
+document.getElementById("sendChat").onclick=send;document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")send()});
+document.getElementById("stars").onclick=e=>{let rect=e.currentTarget.getBoundingClientRect();rating=Math.max(1,Math.min(5,Math.ceil((e.clientX-rect.left)/rect.width*5)));e.currentTarget.textContent=Array.from({length:5},(_,i)=>i<rating?"★":"☆").join(" ")};
+document.getElementById("submitRating").onclick=()=>document.getElementById("ratingMsg").textContent=rating?`Thanks! Your ${rating}-star rating is recorded for this session.`:"Tap the stars first.";
+document.getElementById("feedbackForm").onsubmit=e=>{e.preventDefault();let entry={name:document.getElementById("fbName").value,text:document.getElementById("fbText").value,date:new Date().toISOString()};try{let all=JSON.parse(localStorage.getItem("chipstarFeedback")||"[]");all.push(entry);localStorage.setItem("chipstarFeedback",JSON.stringify(all));document.getElementById("fbMsg").textContent="Feedback saved in this browser on this device. It has not been sent to the bakery."}catch(err){document.getElementById("fbMsg").textContent="Thanks for the feedback. This browser could not save it locally."}e.target.reset()};
+document.getElementById("year").textContent=new Date().getFullYear();render();updateCart();
+if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));
+}
+</script></body></html>
