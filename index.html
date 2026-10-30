@@ -1,102 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#061432">
-<meta name="description" content="Chipstar Bakery — Home of Sweetness and freshness. Browse cakes, pastries and treats.">
-<link rel="stylesheet" href="style.css">
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<title>Chipstar Bakery</title>
-<style>
-:root{--navy:#061432;--navy2:#0b2452;--silver:#dbe8ff;--blue:#3185ff;--muted:#a9bad9;--gold:#ffd66b}
-*{box-sizing:border-box}body{margin:0;color:#f7f9ff;font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(ellipse at top,#173d79 0,#071735 42%,#030b1d 100%);min-height:100vh}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.32;background-image:radial-gradient(#fff 1px,transparent 1px),radial-gradient(#75baff 1px,transparent 1px);background-size:87px 87px,131px 131px;background-position:0 0,35px 50px}
-button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit}.wrap{max-width:1180px;margin:auto;padding:18px;position:relative}
-header{border:1px solid #a8c9ff;border-radius:22px;padding:22px;background:linear-gradient(135deg,#071431eF,#16366beF);box-shadow:0 0 25px #5c9dff25;position:relative}
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.brand{font-size:clamp(2.1rem,6vw,4rem);font-weight:900;letter-spacing:-2px;line-height:1;color:#f7faff;text-shadow:0 0 18px #9cc9ff}.tag{color:#d5e4ff;margin:10px 0 0;font-style:italic}.pill,.btn{border:1px solid #b9d6ff;border-radius:999px;background:linear-gradient(135deg,#1a65d9,#071a42);padding:10px 17px;box-shadow:0 0 12px #529bff26}.btn:hover,.pill:hover{filter:brightness(1.2)}.menu{position:relative}.menu-pop{display:none;position:absolute;right:0;top:48px;width:220px;background:#081733;border:1px solid #a9c9ff;border-radius:14px;padding:8px;z-index:5;box-shadow:0 10px 35px #0009}.menu-pop.open{display:grid}.menu-pop button{text-align:left;background:transparent;border:0;padding:12px;border-radius:8px}.menu-pop button:hover{background:#193666}
-nav{display:flex;gap:9px;flex-wrap:wrap;margin-top:22px}.searchbar{display:flex;gap:8px;margin:18px 0}.searchbar input{flex:1;min-width:0;background:#07142d;color:white;border:1px solid #5878a9;border-radius:12px;padding:12px}
-h2{font-size:1.35rem;margin:26px 0 12px}.sub{color:var(--muted);margin-top:-8px}.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.feature{border:1px solid #aacbff;border-radius:18px;overflow:hidden;background:#071632;box-shadow:0 5px 20px #0003}.food-img{height:155px;display:block;width:100%;object-fit:cover;background:linear-gradient(135deg,#1e4e8f,#101b38)}.feature .pad{padding:14px}.availability{display:inline-block;font-size:.78rem;border:1px solid #5fbd92;color:#a6f2c7;padding:2px 8px;border-radius:999px;margin-top:7px}.availability.limited{border-color:#d4b46b;color:#ffe3a1}.contact-line{margin:8px 0}.feature h3{margin:0}.muted{color:var(--muted)}.occasion-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.occasion{background:#0a1a38;border:1px solid #486da5;border-radius:14px;padding:14px 8px;text-align:center}.occasion img{display:block;width:100%;height:92px;object-fit:cover;border-radius:9px;margin-bottom:8px}.occasion strong{display:block}.products{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.product{background:linear-gradient(150deg,#102b59,#07142c);border:1px solid #759dd7;border-radius:16px;overflow:hidden}.product .food-img{height:135px;font-size:4rem}.product .pad{padding:12px}.price{font-weight:800;font-size:1.15rem}.stars{color:var(--gold);font-size:.9rem}.actions{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:10px}.small{font-size:.85rem}.quick{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:20px}.quick button{background:#0b1b3a;border:1px solid #5479b3;border-radius:14px;padding:14px 6px}.quick b{display:block;font-size:1.5rem}.panel{display:none;margin-top:18px;padding:18px;border:1px solid #83aeea;border-radius:16px;background:#07152e}.panel.open{display:block}.chatlog{height:220px;overflow:auto;display:flex;flex-direction:column;gap:8px;margin:12px 0}.bubble{padding:10px 12px;border-radius:12px;max-width:88%;background:#17325e}.bubble.user{align-self:flex-end;background:#1758ad}.chatrow{display:flex;gap:8px}.chatrow input{flex:1;min-width:0;background:#020b1c;border:1px solid #49699a;border-radius:10px;padding:10px;color:white}.cart-line{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #28436b}.notice{color:#bcd5ff;font-size:.9rem}footer{margin:30px 0 10px;padding:20px;border-top:1px solid #759dd7;color:#b9c9e5;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
-@media(max-width:800px){.products{grid-template-columns:repeat(2,1fr)}.occasion-grid{grid-template-columns:repeat(3,1fr)}.quick{grid-template-columns:repeat(3,1fr)}.feature-grid{grid-template-columns:1fr 1fr 1fr}.food-img{height:120px;font-size:4rem}}
-@media(max-width:520px){.wrap{padding:10px}.feature-grid{grid-template-columns:1fr}.feature{display:grid;grid-template-columns:110px 1fr}.feature .food-img{height:100%;min-height:125px;font-size:3.4rem}.occasion-grid{grid-template-columns:repeat(2,1fr)}.brand{letter-spacing:-1px}.quick{grid-template-columns:repeat(2,1fr)}}
-</style>
- <script src="chipstar.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07142f">
+  <meta name="description" content="Chipstar Bakery 鈥� Home of Sweetness and freshness. Explore our cakes, buns, rolls, doughnuts and pastries. Search our catalogue and order through WhatsApp.">
+  <title>Chipstar Bakery | Home of Sweetness and freshness</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body><div class="wrap">
-<header>
- <div class="top"><div><div class="brand">✧ CHIPSTAR ✧</div><p class="tag">Home of Sweetness and freshness.</p></div>
- <div class="menu"><button class="pill" id="menuBtn" aria-label="Open menu">⋮</button><div class="menu-pop" id="menuPop"><button data-panel="chatPanel">🤖 Bakery chatbot</button><button data-panel="infoPanel">ℹ️ Information desk</button><button data-panel="feedbackPanel">✉️ Feedback & suggestions</button><button data-panel="ordersPanel">🛍️ Your order</button></div></div></div>
- <nav><button class="btn" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">☰ Menu list</button><button class="pill" data-panel="ordersPanel">🛒 Cart <span id="cartCount">0</span></button><button class="pill" data-panel="chatPanel">Ask our baker ✨</button></nav>
-</header>
-<div class="searchbar"><input id="search" placeholder="Search products, descriptions or availability…" aria-label="Search bakery products"><button class="btn" id="searchBtn">Search</button></div>
-<section><h2>✦ Our bakery favourites</h2><p class="sub">Small-batch delights, baked with love.</p><div class="feature-grid">
-<div class="feature"><img class="food-img" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85" alt="Decorated celebration cake" loading="lazy"><div class="pad"><h3>Signature Cakes</h3><div class="muted">Made for your biggest moments.</div><button class="pill" onclick="filterOccasion('cake')">Explore cakes →</button></div></div>
-<div class="feature"><img class="food-img" src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=900&q=85" alt="Cupcakes with frosting" loading="lazy"><div class="pad"><h3>Dreamy Cupcakes</h3><div class="muted">Little treats, big happiness.</div><button class="pill" onclick="filterOccasion('cupcake')">Explore cupcakes →</button></div></div>
-<div class="feature"><img class="food-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=85" alt="Fresh croissants" loading="lazy"><div class="pad"><h3>Fresh Pastries</h3><div class="muted">Golden, flaky, freshly baked.</div><button class="pill" onclick="filterOccasion('pastry')">Explore pastries →</button></div></div>
-</div></section>
-<section><h2>Perfect for every occasion ✨</h2><p class="sub">Explore real food photography and find treats for every celebration.</p><div class="occasion-grid">
-<button class="occasion" onclick="filterOccasion('birthday')"><img src="https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=600&q=85" alt="Birthday cake" loading="lazy"><strong>Birthday party</strong><small>Cakes & pun cakes</small></button>
-<button class="occasion" onclick="filterOccasion('breakfast')"><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=85" alt="Fresh bakery croissants" loading="lazy"><strong>Breakfast</strong><small>Croissants & muffins</small></button>
-<button class="occasion" onclick="filterOccasion('snack')"><img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=85" alt="Cookies" loading="lazy"><strong>Snack time</strong><small>Cookies & tarts</small></button>
-<button class="occasion" onclick="filterOccasion('wedding')"><img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=600&q=85" alt="Wedding celebration" loading="lazy"><strong>Wedding</strong><small>Wedding cakes</small></button>
-<button class="occasion" onclick="filterOccasion('valentine')"><img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=85" alt="Romantic dessert" loading="lazy"><strong>Valentine's</strong><small>Chocolate eclairs & brandy balls</small></button>
-</div></section>
-<section id="products"><h2>Available now <span class="muted small" id="resultCount"></span></h2><p class="sub">Sample catalogue and prices — customise these for your bakery.</p><div class="products" id="productGrid"></div></section>
-<div class="quick">
-<button data-panel="ordersPanel"><b>🛍️</b>Orders</button><button data-panel="infoPanel"><b>ℹ️</b>Information desk</button><button onclick="document.getElementById('search').focus()"><b>🔎</b>Search products</button><button data-panel="ratingPanel"><b>⭐</b>Rate us</button><button data-panel="feedbackPanel"><b>💡</b>Suggestions</button><button data-panel="feedbackPanel"><b>✉️</b>Feedback</button>
-</div>
-<section class="panel" id="ordersPanel"><h2>Your basket 🛒</h2><div id="cartLines"></div><p><b>Total: <span id="cartTotal">$0.00</span></b></p><p><label for="fulfilmentChoice">Collection or delivery</label><br><select id="fulfilmentChoice" style="width:100%;padding:10px;background:#020b1c;color:white;border:1px solid #49699a;border-radius:9px"><option value="Collection">Collection</option><option value="Delivery">Delivery</option></select></p><p class="notice">Orders are handed off to Chipstar through WhatsApp. No payment is taken in this demo; the bakery will confirm availability, delivery details and final price.</p><button class="btn" id="checkout">Prepare order summary</button>
-<button class="btn" id="whatsappCheckout" style="margin-left:8px;background:linear-gradient(135deg,#147c50,#075334)">Send order via WhatsApp ↗</button>
-<div id="checkoutMsg" class="notice"></div>
-<p class="notice">WhatsApp ordering is configured for Chipstar. Select collection or delivery above; the bakery will confirm delivery availability and any fee.</p></section>
-<section class="panel" id="chatPanel"><h2>Chipstar Bakery Assistant 🤖</h2><p class="muted">Ask about cakes, ingredients, party orders, breakfast treats or recommendations.</p><div class="chatlog" id="chatlog"><div class="bubble">Hello! Welcome to Chipstar. 🧁 What sweet treat can I help you find today?</div></div><div class="chatrow"><input id="chatInput" placeholder="Ask about our bakery products…"><button class="btn" id="sendChat">Send</button></div></section>
-<section class="panel" id="infoPanel"><h2>Information desk</h2><p>Welcome to Chipstar — Home of Sweetness and freshness.</p><p class="contact-line">📍 <strong>Address:</strong> 3927 Simbi Park, Rutendo</p><p class="contact-line">☎️ <strong>Call or WhatsApp:</strong><br><a href="tel:+263782462881">+263 78 246 2881</a> · <a href="tel:+263782246461">+263 78 224 6461</a> · <a href="tel:+263776813770">+263 77 681 3770</a></p><p>For custom cakes, weddings, birthdays and bulk pastry orders, contact us with your preferred date, servings and design. We offer collection and delivery; delivery availability and charges are confirmed when you order.</p><p class="notice">Product availability can change during the day. Please confirm stock and custom-order lead times with the bakery before paying.</p></section>
-<section class="panel" id="ratingPanel"><h2>Rate Chipstar ⭐</h2><p>How was your experience?</p><div id="stars" style="font-size:2rem;color:#ffd66b">☆ ☆ ☆ ☆ ☆</div><button class="btn" id="submitRating">Submit rating</button><p id="ratingMsg" class="notice"></p></section>
-<section class="panel" id="feedbackPanel"><h2>Feedback & suggestions ✉️</h2><form id="feedbackForm"><p><label>Your name (optional)<br><input id="fbName" style="width:100%;padding:10px;background:#020b1c;color:white;border:1px solid #49699a;border-radius:9px"></label></p><p><label>What would you like to tell us?<br><textarea id="fbText" required rows="3" style="width:100%;padding:10px;background:#020b1c;color:white;border:1px solid #49699a;border-radius:9px"></textarea></label></p><button class="btn">Save feedback on this device</button><p id="fbMsg" class="notice"></p></form></section>
-<footer><span>📍 Visit us at 3927 Simbi Park, Rutendo</span><span>☎️ Or contact us on +263 78 246 2881 · +263 78 224 6461 · +263 77 681 3770</span><span>© <span id="year"></span> Chipstar Bakery. All rights reserved.</span><span>Sweet Moments. Always. ✦</span></footer>
-</div>
-<script>
-const products=[
-{id:1,name:"Chocolate Celebration Cake",price:12.99,emoji:"🎂",image:"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85",rating:4.8,tags:["cake","birthday","wedding","valentine"],desc:"Rich chocolate sponge layered with smooth chocolate frosting; custom sizes by request.",availability:"Made to order",status:"limited"},
-{id:2,name:"Vanilla Cupcakes (6)",price:6.99,emoji:"🧁",image:"https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=900&q=85",rating:4.7,tags:["cupcake","birthday","snack"],desc:"Six fluffy vanilla cupcakes finished with swirled buttercream.",availability:"Usually available",status:"available"},
-{id:3,name:"Butter Croissants",price:4.99,emoji:"🥐",image:"https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=85",rating:4.6,tags:["pastry","breakfast","snack"],desc:"Golden, flaky, buttery croissants for breakfast or tea.",availability:"Daily bake; confirm today's stock",status:"limited"},
-{id:4,name:"Red Velvet Cake",price:14.99,emoji:"🍰",image:"https://images.unsplash.com/photo-1586788680434-30d324b2d46f?auto=format&fit=crop&w=900&q=85",rating:4.9,tags:["cake","birthday","wedding","valentine"],desc:"Soft red velvet layers with creamy frosting; order ahead for special designs.",availability:"Made to order",status:"limited"},
-{id:5,name:"Fruit Tarts",price:5.99,emoji:"🥧",image:"https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=85",rating:4.5,tags:["pastry","breakfast","snack"],desc:"Crisp pastry shells with a creamy filling and fruit topping.",availability:"Confirm today's stock",status:"limited"},
-{id:6,name:"Chocolate Chip Cookies",price:3.50,emoji:"🍪",image:"https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=900&q=85",rating:4.8,tags:["snack","breakfast"],desc:"Golden cookies with chocolate chips; ideal for lunchboxes and sharing.",availability:"Usually available",status:"available"},
-{id:7,name:"Wedding Tier Cake",price:85.00,emoji:"💍",image:"https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=900&q=85",rating:5.0,tags:["cake","wedding"],desc:"Elegant custom tier cake; price depends on size, servings, flavours and decoration.",availability:"Advance booking required",status:"limited"},
-{id:8,name:"Strawberry Love Cake",price:18.50,emoji:"💝",image:"https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=900&q=85",rating:4.9,tags:["cake","valentine","birthday"],desc:"A strawberry-inspired celebration cake for romantic occasions and birthdays.",availability:"Made to order",status:"limited"},
-{id:9,name:"Fresh Muffins",price:4.50,emoji:"🧁",image:"https://images.unsplash.com/photo-1607958996333-41aef7caefaa?auto=format&fit=crop&w=900&q=85",rating:4.7,tags:["breakfast","snack"],desc:"Soft bakery muffins, suitable for breakfast or a quick treat.",availability:"Daily bake; confirm today's stock",status:"limited"},
-{id:10,name:"Pun Cakes",price:16.00,emoji:"🎂",image:"https://images.unsplash.com/photo-1535254973040-607b474cb50d?auto=format&fit=crop&w=900&q=85",rating:4.8,tags:["cake","birthday"],desc:"Playful custom cakes with a pun, joke or personalised message. Share your wording when ordering.",availability:"Custom order; book ahead",status:"limited"},
-{id:11,name:"Chocolate Éclairs",price:5.50,emoji:"🍫",image:"https://images.unsplash.com/photo-1551024506-0bcf828d1b70?auto=format&fit=crop&w=900&q=85",rating:4.7,tags:["valentine","snack","pastry"],desc:"Choux pastry filled with cream and finished with chocolate topping.",availability:"Confirm today's stock",status:"limited"},
-{id:12,name:"Brandy Balls",price:4.00,emoji:"🍬",image:"https://images.unsplash.com/photo-1548907040-4d42bfc8f2b4?auto=format&fit=crop&w=900&q=85",rating:4.6,tags:["valentine","snack"],desc:"Rich chocolatey celebration bites. Ask the bakery to confirm ingredients before ordering.",availability:"Made to order; confirm ingredients",status:"limited"}
-];
-// SET THIS to the bakery's WhatsApp number in international format, digits only.
- // Example format: country code + number, with no plus sign or spaces.
-const WHATSAPP_NUMBER = "263782462881";
-const CURRENCY = "USD";
-const FULFILMENT_OPTIONS = ["Collection", "Delivery"];
-let cart={}, activeFilter="", rating=0;
-const money=n=>new Intl.NumberFormat("en-US",{style:"currency",currency:CURRENCY}).format(n);
-function render(list=products){document.getElementById("productGrid").innerHTML=list.map(p=>`<article class="product"><img class="food-img" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=85'"><div class="pad"><b>${p.name}</b><div class="muted small">${p.desc}</div><div class="availability ${p.status==='limited'?'limited':''}">${p.availability}</div><div class="actions"><span class="price">${money(p.price)}</span><span class="stars">★ ${p.rating}</span></div><button class="btn" style="width:100%;margin-top:10px" onclick="addCart(${p.id})">＋ Add to cart</button></div></article>`).join("");document.getElementById("resultCount").textContent=`(${list.length} items)`}
-function addCart(id){cart[id]=(cart[id]||0)+1;updateCart();document.getElementById("ordersPanel").classList.add("open")}
-function updateCart(){let ids=Object.keys(cart);document.getElementById("cartCount").textContent=ids.reduce((s,id)=>s+cart[id],0);document.getElementById("cartLines").innerHTML=ids.length?ids.map(id=>{let p=products.find(x=>x.id==id);return `<div class="cart-line"><span>${p.emoji} ${p.name} × ${cart[id]}</span><span>${money(p.price*cart[id])} <button class="pill" onclick="removeCart(${id})">−</button></span></div>`}).join(""):"Your basket is empty — add a treat to get started.";let total=ids.reduce((s,id)=>s+products.find(p=>p.id==id).price*cart[id],0);document.getElementById("cartTotal").textContent=money(total)}
-function removeCart(id){if(cart[id]>1)cart[id]--;else delete cart[id];updateCart()}
-function filterOccasion(tag){activeFilter=tag;let list=products.filter(p=>p.tags.includes(tag));render(list);document.getElementById("products").scrollIntoView({behavior:"smooth"})}
-function searchProducts(){let q=document.getElementById("search").value.toLowerCase().trim();activeFilter="";render(products.filter(p=>(p.name+" "+p.desc+" "+p.tags.join(" ")+" "+p.availability).toLowerCase().includes(q)))}
-document.getElementById("searchBtn").onclick=searchProducts;document.getElementById("search").addEventListener("keydown",e=>{if(e.key==="Enter")searchProducts()});
-document.getElementById("menuBtn").onclick=()=>document.getElementById("menuPop").classList.toggle("open");
-document.querySelectorAll("[data-panel]").forEach(b=>b.addEventListener("click",()=>{let panel=document.getElementById(b.dataset.panel);panel.classList.toggle("open");panel.scrollIntoView({behavior:"smooth",block:"nearest"});document.getElementById("menuPop").classList.remove("open")}));
-function orderText(){let ids=Object.keys(cart);let lines=ids.map(id=>{let p=products.find(p=>p.id==id);return `• ${p.name} × ${cart[id]} — ${money(p.price*cart[id])}`});const fulfilment=document.getElementById("fulfilmentChoice").value;return `Hello Chipstar Bakery! I'd like to place an order:\n\n${lines.join("\n")}\n\nTotal: ${document.getElementById("cartTotal").textContent}\nPreferred fulfilment: ${fulfilment}\nPlease confirm availability${fulfilment === "Delivery" ? ", delivery area, address details and delivery fee" : " and collection time"}, and final price.`}
-document.getElementById("checkout").onclick=()=>{let ids=Object.keys(cart);document.getElementById("checkoutMsg").textContent=ids.length?"Order summary prepared: "+ids.map(id=>products.find(p=>p.id==id).name+" × "+cart[id]).join(", ")+". Total "+document.getElementById("cartTotal").textContent+". Use WhatsApp to send this order to the bakery.":"Your basket is empty."};
-document.getElementById("whatsappCheckout").onclick=()=>{if(!Object.keys(cart).length){document.getElementById("checkoutMsg").textContent="Your basket is empty. Add a product first.";return;}if(!/^\d{8,15}$/.test(WHATSAPP_NUMBER)){document.getElementById("checkoutMsg").textContent="WhatsApp is almost ready. Set WHATSAPP_NUMBER in index.html to the bakery's international phone number (digits only), then reopen the app.";return;}window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(orderText()),"_blank","noopener");};
-function botReply(q){let s=q.toLowerCase();if(/price|cost|how much/.test(s)){return `Prices in the sample catalogue range from ${money(Math.min(...products.map(p=>p.price)))} to ${money(Math.max(...products.map(p=>p.price)))}. Tap Menu to compare items; the bakery should confirm final custom-order prices.`}if(/birthday|party|celebrat/.test(s)){return "For a birthday, consider our Chocolate Celebration Cake, Red Velvet Cake, Pun Cakes and Vanilla Cupcakes. Tell the bakery your date, number of guests and preferred flavour for a custom quote."}if(/wedding/.test(s)){return "Our demo catalogue includes a Wedding Tier Cake. Tier count, servings, design and delivery affect the final quote, so confirm these with the bakery."}if(/breakfast|morning/.test(s)){return "For breakfast, try Butter Croissants and Fresh Muffins. Search the menu to see descriptions and availability notes."}if(/allerg|ingredient|vegan|gluten|nut|dairy/.test(s)){return "Please contact the bakery to verify ingredients and cross-contamination risks before ordering. Allergen information is not yet verified in this catalogue."}if(/order|deliver|delivery|pay/.test(s)){return "Add items to your basket and send the order through WhatsApp. Choose collection or delivery in the basket; the bakery will confirm availability, delivery details and any fee. Payments and delivery tracking are not built into this demo."}if(/valentine|love/.test(s)){return "For a romantic treat, try Strawberry Love Cake, Chocolate Éclairs or Brandy Balls. Please confirm stock and ingredients with the bakery."}if(/hello|hi |hey/.test(s)){return "Hello and welcome! Are you shopping for a cake, breakfast pastries, snacks, or a special event?"}return "I'd be happy to help with cakes, cupcakes, pastries, breakfast, party treats and custom orders. What occasion or product do you have in mind?"}
-function send(){let input=document.getElementById("chatInput"),q=input.value.trim();if(!q)return;let log=document.getElementById("chatlog");log.insertAdjacentHTML("beforeend",`<div class="bubble user"></div>`);log.lastElementChild.textContent=q;let answer=botReply(q);log.insertAdjacentHTML("beforeend",`<div class="bubble"></div>`);log.lastElementChild.textContent=answer;input.value="";log.scrollTop=log.scrollHeight}
-document.getElementById("sendChat").onclick=send;document.getElementById("chatInput").addEventListener("keydown",e=>{if(e.key==="Enter")send()});
-document.getElementById("stars").onclick=e=>{let rect=e.currentTarget.getBoundingClientRect();rating=Math.max(1,Math.min(5,Math.ceil((e.clientX-rect.left)/rect.width*5)));e.currentTarget.textContent=Array.from({length:5},(_,i)=>i<rating?"★":"☆").join(" ")};
-document.getElementById("submitRating").onclick=()=>document.getElementById("ratingMsg").textContent=rating?`Thanks! Your ${rating}-star rating is recorded for this session.`:"Tap the stars first.";
-document.getElementById("feedbackForm").onsubmit=e=>{e.preventDefault();let entry={name:document.getElementById("fbName").value,text:document.getElementById("fbText").value,date:new Date().toISOString()};try{let all=JSON.parse(localStorage.getItem("chipstarFeedback")||"[]");all.push(entry);localStorage.setItem("chipstarFeedback",JSON.stringify(all));document.getElementById("fbMsg").textContent="Feedback saved in this browser on this device. It has not been sent to the bakery."}catch(err){document.getElementById("fbMsg").textContent="Thanks for the feedback. This browser could not save it locally."}e.target.reset()};
-document.getElementById("year").textContent=new Date().getFullYear();render();updateCart();
-if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));
-}
-</script></body></html>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header" id="home">
+    <div class="header-menu-wrap">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteMenu" aria-label="Open menu">&#8942;</button>
+      <nav class="menu-panel" id="siteMenu" aria-label="More links" hidden>
+        <a href="#menu">Menu list</a>
+        <a href="#search-assistant">Search products</a>
+        <a href="#search-assistant">Bakery chatbot</a>
+        <a href="#contact">Contact and orders</a>
+        <a href="https://wa.me/263782462881" target="_blank" rel="noopener noreferrer">WhatsApp ordering</a>
+      </nav>
+    </div>
+    <p class="eyebrow">鉁� Freshly baked 路 Made with care 鉁�</p>
+    <h1 class="brand-name">Chipstar</h1>
+    <p class="brand-slogan">Home of Sweetness and freshness.</p>
+    <p class="header-description">Cakes, pastries and bakery favourites for your everyday moments and special celebrations.</p>
+    <a class="btn btn-primary" href="#menu">Explore Our Menu</a>
+  </header>
+
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="#home">Home</a>
+    <a href="#menu">Menu List</a>
+    <a href="#search-assistant">Search &amp; Chat</a>
+    <a href="#occasions">Occasions</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <main id="main-content" class="container">
+    <section class="panel intro-panel" aria-labelledby="welcome-title">
+      <p class="eyebrow">Welcome to Chipstar Bakery</p>
+      <h2 id="welcome-title">A little sweetness for every occasion</h2>
+      <p class="section-intro">Browse our current catalogue, check listed prices in USD, and ask our bakery assistant about products. Stock, ingredients, allergens and nutrition should be confirmed with the bakery when they are not yet verified.</p>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-symbol" aria-hidden="true">鉁�</div>
+          <div class="card-content">
+            <h3>Celebration Cakes</h3>
+            <p>Birthday cakes and special-occasion treats.</p>
+          </div>
+        </article>
+        <article class="feature-card">
+          <div class="feature-symbol" aria-hidden="true">鉁�</div>
+          <div class="card-content">
+            <h3>Fresh Bakery Favourites</h3>
+            <p>Buns, rolls, doughnuts and croissants.</p>
+          </div>
+        </article>
+        <article class="feature-card">
+          <div class="feature-symbol" aria-hidden="true">鉁�</div>
+          <div class="card-content">
+            <h3>Easy WhatsApp Orders</h3>
+            <p>Contact the bakery to confirm your order details.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="menu" class="panel" aria-labelledby="menu-title">
+      <h2 id="menu-title" class="section-title">Our Bakery Menu</h2>
+      <p class="section-intro">The catalogue below is connected to <code>chipstar-updated.js</code>. Products with confirmed prices show those prices; other catalogue items may be marked 鈥淧rice to be confirmed.鈥�</p>
+      <div id="productGrid" class="product-grid" aria-live="polite">
+        <p>Loading Chipstar Bakery products鈥�</p>
+      </div>
+    </section>
+
+    <section id="search-assistant" class="panel" aria-labelledby="assistant-section-title">
+      <h2 id="assistant-section-title" class="section-title">Search Products &amp; Ask Our Bakery Assistant</h2>
+      <p class="section-intro">Search by product name, or ask a question about prices, listed sizes, availability or ordering.</p>
+
+      <div class="chipstar-widget">
+        <h3>Search the bakery catalogue</h3>
+        <div class="chipstar-row">
+          <label class="visually-hidden" for="productSearch">Search products</label>
+          <input id="productSearch" class="search-input" type="search" placeholder="Try: chocolate birthday cake or croissant" autocomplete="off">
+          <button id="searchButton" class="btn" type="button">Search</button>
+        </div>
+        <div id="searchResults" class="chipstar-results" aria-live="polite"></div>
+
+        <div class="chipstar-chat" aria-label="Chipstar chatbot">
+          <h3>Chat with Chipstar Assistant</h3>
+          <div id="chatMessages" class="chipstar-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+          <form id="chatForm" class="chipstar-row">
+            <label class="visually-hidden" for="chatInput">Your question</label>
+            <input id="chatInput" class="chat-input" type="text" autocomplete="off" placeholder="Ask about a product, price or order鈥�" required>
+            <button class="btn" type="submit">Send</button>
+          </form>
+          <p class="chipstar-small">The assistant uses the local catalogue. It does not have live stock tracking. Please confirm availability, allergens and dietary information with the bakery before ordering.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="occasions" class="panel" aria-labelledby="occasions-title">
+      <h2 id="occasions-title" class="section-title">Treats for Every Occasion</h2>
+      <p class="section-intro">Ask us about options for your celebration or daily treat. Availability and prices for items not yet priced in the catalogue must be confirmed.</p>
+      <div class="category-grid">
+        <article class="category-card">
+          <div class="occasion-icon" aria-hidden="true">馃巶</div>
+          <div class="card-content">
+            <h3>Birthday Parties</h3>
+            <p>Chocolate, vanilla and red velvet birthday cakes, plus custom pun cakes.</p>
+          </div>
+        </article>
+        <article class="category-card">
+          <div class="occasion-icon" aria-hidden="true">鈽�</div>
+          <div class="card-content">
+            <h3>Breakfast</h3>
+            <p>Croissants and muffins for a sweet start to the day.</p>
+          </div>
+        </article>
+        <article class="category-card">
+          <div class="occasion-icon" aria-hidden="true">馃崻</div>
+          <div class="card-content">
+            <h3>Snack Time</h3>
+            <p>Cookies, tarts and other bakery favourites.</p>
+          </div>
+        </article>
+        <article class="category-card">
+          <div class="occasion-icon" aria-hidden="true">馃挐</div>
+          <div class="card-content">
+            <h3>Valentine鈥檚 Day</h3>
+            <p>Chocolate 茅clairs and brandy balls. Please confirm current availability.</p>
+          </div>
+        </article>
+        <article class="category-card">
+          <div class="occasion-icon" aria-hidden="true">馃拲</div>
+          <div class="card-content">
+            <h3>Weddings</h3>
+            <p>Wedding cakes made for your special day. Discuss designs and prices with us.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="panel contact-panel" aria-labelledby="contact-title">
+      <h2 id="contact-title" class="section-title">Contact Chipstar Bakery</h2>
+      <p class="section-intro">Have a question or ready to order? Contact the bakery to confirm availability, final pricing and collection or delivery arrangements.</p>
+      <address>
+        <p><strong>Address:</strong> 3927 Simbi Park, Rutendo</p>
+        <p><strong>Phone:</strong> <a href="tel:+263782462881">+263782462881</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+263782246461">+263782246461</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+263776813770">+263776813770</a></p>
+      </address>
+      <div class="contact-links">
+        <a class="btn btn-primary" href="https://wa.me/263782462881" target="_blank" rel="noopener noreferrer">Order on WhatsApp</a>
+        <a class="btn" href="tel:+263782462881">Call the Bakery</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><strong>Chipstar Bakery</strong> 鈥� Home of Sweetness and freshness.</p>
+    <p>3927 Simbi Park, Rutendo 路 WhatsApp: +263782462881</p>
+    <p>Prices are listed in USD. Please confirm current stock and order totals before payment.</p>
+  </footer>
+
+  <script>
+    (function () {
+      const toggle = document.getElementById('menuToggle');
+      const menu = document.getElementById('siteMenu');
+      if (!toggle || !menu) return;
+
+      toggle.addEventListener('click', function () {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+        menu.hidden = isOpen;
+        menu.classList.toggle('is-open', !isOpen);
+        toggle.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+      });
+
+      menu.addEventListener('click', function (event) {
+        if (event.target.closest('a')) {
+          menu.hidden = true;
+          menu.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open menu');
+        }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+          menu.hidden = true;
+          menu.classList.remove('is-open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.setAttribute('aria-label', 'Open menu');
+        }
+      });
+    })();
+  </script>
+  <script src="chipstar-updated.js" defer></script>
+</body>
+</html>
